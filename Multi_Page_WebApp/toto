@@ -1,0 +1,62 @@
+ [x] 2026-05-11 13:06:17.139447 Received {"id": 1, "engine": "mosaic"}
+ [x] 2026-05-11 13:06:20.297369 Received message from preprocessing.calculate_weights.mosaic with body: {"id": 1, "engine": "mosaic"}
+ [*] 2026-05-11 13:06:20.325463 Saving : ('1', 'calculate_weights', '{"id": 1, "engine": "mosaic"}', 0)
+2026-05-11 13:06:20.331029 Calculating weights mosaic
+2026-05-11 13:06:20.342685 Running Mosaic Runner
+ l_ipsldbg  :  F
+ USING DEFAULTS : l_orca2 = F
+ l_orca2    :  F
+ l_paleorca2    :  T
+ USING DEFAULTS : l_orca1 = F
+ l_orca1    :  F
+ USING DEFAULTS : l_eorca1 = F
+ l_eorca1   :  F
+ USING DEFAULTS : l_orca05 = F
+ l_orca05   :  F
+ USING DEFAULTS : l_orca025 = F
+ l_orca025  :  F
+ USING DEFAULTS : l_orca12 = F
+ l_orca12   :  F
+ USING DEFAULTS : l_lgm = F
+ l_lgm      :  F
+ clcoo      : coordinates.nc
+ cname      : PALEORCA2.5o_i3j87
+ cr         : rp2
+ group      : PALEORCA2
+ production : NEMO
+ cl_met     : bathy_meter.nc
+ nperio     :            6
+ l_bat_cdf  :  T
+ l_meter    :  T
+ l_wri_3D   :  T
+ date : 20260511                                                                        
+ time : 130620.471                                                                      
+ zone : +0000                                                                           
+ values :         2026           5          11           0          13           6          20         471
+ rl=           8  il=           4  r4=           4 r8=           8
+         182         149          31
+ coordinates.nc
+ PALEORCA2.5o_i3j87                                                              
+ rp2                                                                             
+ PALEORCA2                                                                       
+ NEMO                                                                            
+ readwri, reading : coordinates.nc
+
+FATAL ERROR FROM ROUTINE fliogetv
+ --> Variable glamt not get
+ --> Error :
+ --> NetCDF: Start+count exceeds dimension bound
+
+CplModel : PALEORCA2.5o_i3j87xLMD96x95
+CplModel : PALEORCA2.5o_i3j87xLMD96x95
+OceModel : PALEORCA2.5o_i3j87
+AtmModel : LMD96x95
+CplModel : PALEORCA2.5o_i3j87xLMD96x95 - PALEORCA2.5o_i3j87xLMD9695
+Ocean : PALEORCA - 2.5o - paleorca - 182x149 - paleorca2.5o
+Atmosphere : LMD - 96x95 - lmd - 96x95 - lmd96x95
+command : do_link.sh
+Util    : /usr/src/util
+Cpl     : /usr/src
+Bld     : /tmp/ORCA2_BLD
+2026-05-11 13:06:21.179767 Running Grids
+2026-05-11 13:06:21.728538 Running mosaic

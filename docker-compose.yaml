@@ -1,8 +1,8 @@
-version: '2'
 services:
   nginx:
     image: ceregecl/netcdf_editor_nginx
     restart: on-failure
+    platform: linux/amd64
     ports:
       - ${NGINX_PORT}:80
     depends_on: 
@@ -47,6 +47,7 @@ services:
   flask_app:
     image: ceregecl/netcdf_editor_flask_app
     restart: on-failure
+    platform: linux/amd64
     env_file: ${FLASK_CONFIG}
     environment: 
       - BROKER_HOSTNAME=message_broker
@@ -60,7 +61,8 @@ services:
       - instance_storage:/usr/src/app/instance
   
   panel_app:
-    image: ceregecl/netcdf_editor_panel_app
+    image: ceregecl/netcdf_editor_panel_app:v2
+    pull_policy: never
     restart: on-failure
     env_file: ${PANEL_CONFIG}
     environment: 

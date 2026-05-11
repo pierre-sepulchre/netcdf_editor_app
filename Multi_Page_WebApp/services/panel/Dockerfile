@@ -1,10 +1,11 @@
 FROM python:3.8
 
+# Install system dependencies for HDF5 and netcdf
+RUN apt-get update && apt-get install -y libhdf5-dev libnetcdf-dev libgeos-dev && rm -rf /var/lib/apt/lists/*
+
 # Setup the enviroment
 COPY requirements.*txt /tmp/
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
-
-RUN apt-get update && apt-get install -y libgeos-dev
 
 COPY flask_app /usr/src/app/flask_app
 RUN pip install /usr/src/app/flask_app

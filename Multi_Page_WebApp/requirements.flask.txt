@@ -1,4 +1,5 @@
 flask == 2.1.2
+werkzeug == 2.3.7
 simplejson == 3.17.6
 blinker == 1.4
 python-dotenv == 0.20.0

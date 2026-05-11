@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 import mosaic
 
 import os
@@ -12,6 +13,7 @@ from climate_simulation_platform.db import get_file_path, save_file_to_db
 
 
 def calculate_weights(body):
+    t0 = time.time()
     print(f"{datetime.now()} Calculating weights mosaic", flush=True)
     app = create_app()
 
@@ -23,30 +25,36 @@ def calculate_weights(body):
         coords_file = get_file_path(_id, "coords", full=True)
         subbasins_file = get_file_path(_id, "sub_basins", full=True)
 
-    print(f"{datetime.now()} Running Mosaic Runner", flush=True)
+    print(f"{datetime.now()} [TIMER {time.time()-t0:.2f}s] Running Mosaic Runner", flush=True)
     runner = mosaic.MosaicRunner(
         root="/tmp", cpl_dir="/usr/src", user_name=str(uuid.uuid4())
     )
+    t_mosaic = time.time()
     runner.run(
         bathy_file=bathy_file, coords_file=coords_file, subbasins_file=subbasins_file
     )
+    print(f"{datetime.now()} [TIMER {time.time()-t_mosaic:.2f}s] Mosaic Runner completed", flush=True)
 
     # Tar files directly into directory
     temp_name = next(tempfile._get_candidate_names()) + ".tar.gz"
     temp_path = os.path.join(app.config["UPLOAD_FOLDER"], temp_name)
 
-    print(f"{datetime.now()} Compressing files to tar", flush=True)
+    print(f"{datetime.now()} [TIMER {time.time()-t0:.2f}s] Compressing files to tar", flush=True)
+    t_tar = time.time()
     subprocess.Popen(
         ["tar", "-cvzf", temp_path, "IGCM", "DOMSK"],
         cwd=os.path.join("/", "home", runner.user_name),
     ).wait()
+    print(f"{datetime.now()} [TIMER {time.time()-t_tar:.2f}s] Tar compression completed", flush=True)
+    
     # Add file to db
-    print(f"{datetime.now()} Saving new db file {temp_name} to database", flush=True)
+    print(f"{datetime.now()} [TIMER {time.time()-t0:.2f}s] Saving new db file {temp_name} to database", flush=True)
     with app.app_context():
         save_file_to_db(_id, temp_name, "weights")
 
     # Delete Folder
-    print(f"{datetime.now()} Cleaning up")
+    print(f"{datetime.now()} [TIMER {time.time()-t0:.2f}s] Cleaning up", flush=True)
     shutil.rmtree(os.path.join("/", "home", runner.user_name, "IGCM"))
     shutil.rmtree(os.path.join("/", "home", runner.user_name, "DOMSK"))
     runner.cleanup()
+    print(f"{datetime.now()} [TIMER {time.time()-t0:.2f}s] Total calculate_weights completed", flush=True)
