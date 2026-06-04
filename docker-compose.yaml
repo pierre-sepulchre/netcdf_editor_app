@@ -43,6 +43,17 @@ services:
       - message_dispatcher
     volumes:
       - instance_storage:/usr/src/app/instance
+
+  mosaix_worker:
+    image: ceregecl/netcdf_editor_mosaix_worker
+    restart: on-failure
+    environment: 
+      - BROKER_HOSTNAME=message_broker
+    depends_on: 
+      - message_broker
+      - message_dispatcher
+    volumes:
+      - instance_storage:/usr/src/app/instance
     
   flask_app:
     image: ceregecl/netcdf_editor_flask_app
