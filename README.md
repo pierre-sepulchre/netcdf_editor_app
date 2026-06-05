@@ -15,6 +15,8 @@ Checkout the [Documentation](https://paleoclim-cnrs.github.io/netcdf_editor_app/
 
 ## Deploying to local server
 
+This particular fork has been modified to get an app deployable on a mac equipped with M1 proc.
+
 Images are automatically built using the github actions pipeline see https://github.com/CEREGE-CL/netcdf_editor_app/blob/main/.github/workflows/docker-image.yml these are automatically pushed to dockerhub and are therefore accesible for everyone: https://hub.docker.com/orgs/ceregecl/repositories
 
 To deploy these locally you need to:
